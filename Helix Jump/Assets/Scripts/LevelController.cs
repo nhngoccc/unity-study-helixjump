@@ -8,6 +8,7 @@ public class LevelController : MonoBehaviour
 {
     public Transform platformPrefab;
     public Transform culumnPos;
+    public float platformDistance = 1f;
     public void Init()
     {
         GameData gameData = GameController.Instance.gameData;
@@ -19,7 +20,7 @@ public class LevelController : MonoBehaviour
             for(int j = 0; j < 21; j++)
             {
             Transform platformTransform = Instantiate(platformPrefab, culumnPos);
-            Vector3 platformPos = new Vector3(0, -i, 0);
+            Vector3 platformPos = new Vector3(0, -i*platformDistance, 0);
             platformTransform.position = platformPos;
             platformTransform.rotation = Quaternion.Euler(0, 17f*j, 0);
             switch(currentPlatformData.data[j])
@@ -31,7 +32,7 @@ public class LevelController : MonoBehaviour
                 }
                 case PlatformType.Normal:
                 {
-                    platformTransform.GetComponent<MeshRenderer>().material.color = Color.blue;
+                    platformTransform.GetComponent<MeshRenderer>().material.color = Color.gray;
                     break;
                 }
                 case PlatformType.Hard:
